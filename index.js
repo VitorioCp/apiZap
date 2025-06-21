@@ -8,7 +8,7 @@ const port = 3000;
 
 app.use(express.json());
 
-const WEBHOOK_URL = 'https://discord.com/api/webhooks/1386042312844378142/zvzkyRWQbLJ8n5sbo6Fo8DkEvNRnE2WGq68Hq24czL7XnZJg6_tJrYiwDdd3INqnJOXc';
+const WEBHOOK_URL = 'https://vitoriocorrea313.app.n8n.cloud/webhook-test/minhaApiZap';
 
 // Inicializa o cliente do WhatsApp
 const client = new Client({
@@ -41,6 +41,7 @@ client.on('message', async (message) => {
 
         // Envia a mensagem para seu Webhook
         console.log(`📨 Mensagem recebida e enviada para o Webhook: ${message.body}`);
+        await axios.post(WEBHOOK_URL, data);
 
     } catch (err) {
         console.error('❌ Erro ao enviar webhook:', err.message);

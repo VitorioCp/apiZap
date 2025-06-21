@@ -40,9 +40,8 @@ client.on('message', async (message) => {
         };
 
         // Envia a mensagem para seu Webhook
-        await axios.post(WEBHOOK_URL, data);
-
         console.log(`📨 Mensagem recebida e enviada para o Webhook: ${message.body}`);
+
     } catch (err) {
         console.error('❌ Erro ao enviar webhook:', err.message);
     }

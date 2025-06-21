@@ -8,7 +8,7 @@ const port = 3000;
 
 app.use(express.json());
 
-const WEBHOOK_URL = 'https://vitoriocorrea313.app.n8n.cloud/webhook-test/aae35833-a75c-4a7e-b713-4b2ac9fa747b';
+const WEBHOOK_URL = 'https://discord.com/api/webhooks/1386042312844378142/zvzkyRWQbLJ8n5sbo6Fo8DkEvNRnE2WGq68Hq24czL7XnZJg6_tJrYiwDdd3INqnJOXc';
 
 // Inicializa o cliente do WhatsApp
 const client = new Client({

@@ -8,8 +8,8 @@ const port = 3000;
 
 app.use(express.json());
 
-const WEBHOOK_URL = 'https://vitoriocorrea313.app.n8n.cloud/webhook-test/minhaApiZap'
-// 'https://vitoriocorrea313.app.n8n.cloud/webhook/minhaApiZap';
+const WEBHOOK_URL = 'https://seu-webhook.com/endpoint'; // Substitua pelo seu URL de webhook
+
 
 // Inicializa o cliente do WhatsApp
 const client = new Client({
@@ -48,11 +48,11 @@ client.on('message', async (message) => {
         }
 
         const data = {
-            from: message.from,
+            from: message.from.replace('@c.us', '').replace('@g.us', ''), // Remove @c.us ou @g.us
             name: name,
             body: message.body,
             timestamp: new Date().toISOString(),
-             type: isGroup
+            type: isGroup
         };
 
         await axios.post(WEBHOOK_URL, data);
@@ -77,6 +77,11 @@ app.post('/send', async (req, res) => {
 
     if (!phone || !message) {
         return res.status(400).send('Faltando número ou mensagem');
+    }
+
+    // Validação simples: só números, 11 a 13 dígitos
+    if (!/^\d{11,13}$/.test(phone)) {
+        return res.status(400).send(`Número inválido. Use apenas números com DDI e DDD, ex: 5522999999999 ${phone}`);
     }
 
     try {
